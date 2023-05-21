@@ -84,7 +84,7 @@ export default function Memories() {
               <Text className="font-body text-base leading-relaxed text-gray-100">
                 {memory.excerpt}
               </Text>
-              <Link href="/memories/id">
+              <Link href={`/memories/${memory.id}`}>
                 <TouchableOpacity className="flex-row items-center gap-2">
                   <Text className="font-body text-sm text-gray-200">
                     Ler mais
