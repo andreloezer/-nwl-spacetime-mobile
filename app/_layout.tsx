@@ -1,6 +1,6 @@
-import React, { useEffect, useState } from "react";
-import { StatusBar } from 'expo-status-bar';
-import { ImageBackground } from "react-native";
+import React, { useEffect, useState } from 'react'
+import { StatusBar } from 'expo-status-bar'
+import { ImageBackground } from 'react-native'
 import { styled } from 'nativewind'
 import { SplashScreen, Stack } from 'expo-router'
 import * as SecureStore from 'expo-secure-store'
@@ -17,17 +17,18 @@ import { BaiJamjuree_700Bold } from '@expo-google-fonts/bai-jamjuree'
 const StyledStripes = styled(Stripes)
 
 export default function Layout() {
-const [ isUserAuthenticated, setIsUserAuthenticated ] = useState<null | boolean>(null)
+  const [isUserAuthenticated, setIsUserAuthenticated] = useState<
+    null | boolean
+  >(null)
 
-
-  const [ hasLoadedFonts ] = useFonts({
+  const [hasLoadedFonts] = useFonts({
     Roboto_400Regular,
     Roboto_700Bold,
-    BaiJamjuree_700Bold
+    BaiJamjuree_700Bold,
   })
 
   useEffect(() => {
-    SecureStore.getItemAsync('token').then(token => {
+    SecureStore.getItemAsync('token').then((token) => {
       setIsUserAuthenticated(!!token)
     })
   }, [])
@@ -37,22 +38,24 @@ const [ isUserAuthenticated, setIsUserAuthenticated ] = useState<null | boolean>
   return (
     <ImageBackground
       source={blurBg}
-      className="relative px-8 flex-1 bg-gray-900 py-10"
+      className="relative flex-1 bg-gray-900 px-8 py-10"
       imageStyle={{
         position: 'absolute',
-        left: '-100%'
+        left: '-100%',
       }}
     >
       <StyledStripes className="absolute left-2" />
-      <StatusBar style="light" translucent/>
-      <Stack screenOptions={{
-        headerShown: false,
-        contentStyle: { backgroundColor: 'transparent' },
+      <StatusBar style="light" translucent />
+      <Stack
+        screenOptions={{
+          headerShown: false,
+          contentStyle: { backgroundColor: 'transparent' },
+          animation: 'fade',
         }}
       >
         <Stack.Screen name="index" redirect={isUserAuthenticated} />
-        <Stack.Screen name="new" />
         <Stack.Screen name="memories" />
+        <Stack.Screen name="new" />
       </Stack>
     </ImageBackground>
   )
